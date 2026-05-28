@@ -31,24 +31,24 @@ public class CurrencyUIManager implements Listener
     }
 
     @EventHandler
-    public void onUserBalanceChange(UserBalanceChangeEvent userBalanceChangeEvent)
+    public void onUserBalanceChange(UserBalanceChangeEvent event)
     {
-        Player player = Bukkit.getPlayer(userBalanceChangeEvent.getPlayerUUID());
+        Player player = Bukkit.getPlayer(event.getPlayerUUID());
 
         if (player != null && player.isOnline())
-            updateBalance(userBalanceChangeEvent.getPlayerUUID(), userBalanceChangeEvent.getNewBalance());
+            updateBalance(event.getPlayerUUID(), event.getNewBalance());
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent playerJoinEvent)
+    public void onPlayerJoin(PlayerJoinEvent event)
     {
-        assignScoreboard(playerJoinEvent.getPlayer().getUniqueId());
+        assignScoreboard(event.getPlayer().getUniqueId());
     }
 
     @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent playerQuitEvent)
+    public void onPlayerQuit(PlayerQuitEvent event)
     {
-        playerBoards.remove(playerQuitEvent.getPlayer().getUniqueId());
+        playerBoards.remove(event.getPlayer().getUniqueId());
     }
 
     private void assignScoreboard(UUID playerUUID)

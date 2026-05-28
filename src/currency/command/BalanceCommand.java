@@ -58,6 +58,7 @@ public class BalanceCommand extends SubCommand
     {
         if (args.length < 3) {
             sender.sendMessage("§eusage: /tr currency balance set <player> <amount>");
+
             return true;
         }
 
@@ -67,6 +68,7 @@ public class BalanceCommand extends SubCommand
         Player player = Bukkit.getPlayer(playerName);
         if (player == null) {
             sender.sendMessage("§cPlayer not found or currently offline.");
+
             return true;
         }
 
@@ -75,10 +77,12 @@ public class BalanceCommand extends SubCommand
             amountValue = Long.parseLong(amount);
             if (amountValue < 0) {
                 sender.sendMessage("§cAmount cannot be negative");
+
                 return true;
             }
         } catch (NumberFormatException e) {
             sender.sendMessage("§cAmount should be number");
+
             return true;
         }
 
@@ -86,6 +90,7 @@ public class BalanceCommand extends SubCommand
         sender.sendMessage(
                 String.format("§a%s's balance have been set to %s", player.getName(),
                         CurrencyFormatter.format(amountValue)));
+
         return true;
     }
 

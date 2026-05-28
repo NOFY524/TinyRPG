@@ -2,21 +2,21 @@ package currency;
 
 public class CurrencyFormatter
 {
-    public static String format(long amount)
+    public static String format(long value)
     {
-        return String.format("%,d", amount);
+        return String.format("%,d", value);
     }
 
-    public static String format_compact(long amount)
+    public static String format_compact(long value)
     {
-        if (amount >= 1_000_000_000) {
-            return String.format("%.1fB", amount / 1_000_000_000.0);
-        } else if (amount >= 1_000_000) {
-            return String.format("%.1fM", amount / 1_000_000.0);
-        } else if (amount >= 1_000) {
-            return String.format("%.1fK", amount / 1_000.0);
+        if (value >= 1_000_000_000) {
+            return String.format("%.1fB", value / 1_000_000_000.0);
+        } else if (value >= 1_000_000) {
+            return String.format("%.1fM", value / 1_000_000.0);
+        } else if (value >= 1_000) {
+            return String.format("%.1fK", value / 1_000.0);
         } else {
-            return Long.toString(amount);
+            return Long.toString(value);
         }
     }
 }
