@@ -1,0 +1,9 @@
+name: TinyRPG
+main: tinyrpg.TinyRPG
+version: 0.0.1
+api-version: '1.21.11'
+author: NOFY
+
+commands:
+  tr:
+    description: basic command for accessing plugin's features
