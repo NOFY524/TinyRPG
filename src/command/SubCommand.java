@@ -1,5 +1,6 @@
 package command;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.bukkit.command.CommandSender;
@@ -9,6 +10,11 @@ public abstract class SubCommand
     private String name;
 
     private List<String> aliases;
+
+    public SubCommand(String name)
+    {
+        this(name, Collections.emptyList());
+    }
 
     public SubCommand(String name, List<String> aliases)
     {

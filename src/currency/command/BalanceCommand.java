@@ -57,7 +57,7 @@ public class BalanceCommand extends SubCommand
     private boolean handleSet(CommandSender sender, String[] args)
     {
         if (args.length < 3) {
-            sender.sendMessage("§cusage: /tr currency balance set <player> <amount>");
+            sender.sendMessage("§eusage: /tr currency balance set <player> <amount>");
             return true;
         }
 

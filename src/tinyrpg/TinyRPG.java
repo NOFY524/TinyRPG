@@ -24,15 +24,14 @@ public class TinyRPG extends JavaPlugin
         Bukkit.getScheduler().runTaskTimer(this, currencyManager::storeData, 20L * 60L * 5L, 20L * 60L * 5L);
 
         this.currencyUIManager = new CurrencyUIManager(currencyManager);
-        Bukkit.getScheduler().runTaskTimer(this, currencyUIManager::update, 20L, 20L);
+        Bukkit.getPluginManager().registerEvents(currencyUIManager, this);
 
         // CommandHandler registration
         tinyRPGCommandExecutor = new TinyRPGCommandExecutor();
 
         CurrencyCommandManager currencyCommandManager = new CurrencyCommandManager(currencyManager);
 
-        tinyRPGCommandExecutor.addSubCommandHandler("currency", currencyCommandManager);
-        tinyRPGCommandExecutor.addSubCommandHandler("cr", currencyCommandManager);
+        tinyRPGCommandExecutor.register(currencyCommandManager);
 
         getCommand("tr").setExecutor(tinyRPGCommandExecutor);
         getCommand("tr").setTabCompleter(tinyRPGCommandExecutor);
