@@ -112,6 +112,10 @@ public class BalanceCommand extends SubCommand
                     .toList();
         }
 
+        if (args.length == 3 && args[0].equals("set") && sender.isOp()) {
+            return List.of("<amount>");
+        }
+
         return Collections.emptyList();
     }
 }

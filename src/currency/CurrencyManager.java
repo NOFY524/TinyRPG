@@ -17,55 +17,54 @@ public class CurrencyManager
     {
         this.currencyStorage = new CurrencyStorage(env);
         this.currencyData = currencyStorage.loadData();
-
     }
 
-    public long getBalance(UUID uuid)
+    public long getBalance(UUID playerUUID)
     {
-        if (!currencyData.containsKey(uuid))
-            currencyData.put(uuid, 0L);
+        if (!currencyData.containsKey(playerUUID))
+            currencyData.put(playerUUID, 0L);
 
-        return currencyData.get(uuid);
+        return currencyData.get(playerUUID);
     }
 
-    public void setBalance(UUID uuid, Long amount)
+    public void setBalance(UUID playerUUID, Long amount)
     {
-        long oldBalance = getBalance(uuid);
+        long oldBalance = getBalance(playerUUID);
 
-        setBalance(uuid, oldBalance, amount);
+        setBalance(playerUUID, oldBalance, amount);
     }
 
-    private void setBalance(UUID uuid, Long oldBalance, Long newBalance)
+    private void setBalance(UUID playerUUID, Long oldBalance, Long newBalance)
     {
-        if (oldBalance == newBalance)
+        if (oldBalance.equals(newBalance))
             return;
 
-        currencyData.put(uuid, newBalance);
+        currencyData.put(playerUUID, newBalance);
 
-        Bukkit.getPluginManager().callEvent(new UserBalanceChangeEvent(uuid, oldBalance, newBalance));
+        Bukkit.getPluginManager().callEvent(new UserBalanceChangeEvent(playerUUID, oldBalance, newBalance));
     }
 
-    public void addBalance(UUID uuid, Long amount)
+    public void addBalance(UUID playerUUID, Long amount)
     {
         if (amount <= 0)
             return;
 
-        long current_balance = getBalance(uuid);
+        long current_balance = getBalance(playerUUID);
 
-        setBalance(uuid, current_balance, current_balance + amount);
+        setBalance(playerUUID, current_balance, current_balance + amount);
     }
 
-    public boolean removeBalance(UUID uuid, Long amount)
+    public boolean removeBalance(UUID playerUUID, Long amount)
     {
         if (amount <= 0)
             return amount == 0;
 
-        long current_balance = getBalance(uuid);
+        long current_balance = getBalance(playerUUID);
 
         if (amount > current_balance)
             return false;
 
-        setBalance(uuid, current_balance, current_balance - amount);
+        setBalance(playerUUID, current_balance, current_balance - amount);
 
         return true;
     }

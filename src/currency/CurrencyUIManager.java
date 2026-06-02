@@ -93,6 +93,6 @@ public class CurrencyUIManager implements Listener
         if (balanceTeam == null)
             return;
 
-        balanceTeam.setPrefix("§bMoney: §6" + CurrencyFormatter.format_compact(newBalance));
+        balanceTeam.setPrefix("§bMoney: §6" + CurrencyFormatter.formatCompact(newBalance));
     }
 }

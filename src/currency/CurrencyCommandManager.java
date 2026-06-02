@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import command.MultiSubCommand;
 
 import currency.command.BalanceCommand;
+import currency.command.WithdrawCommand;
 
 public class CurrencyCommandManager extends MultiSubCommand
 {
@@ -15,6 +16,7 @@ public class CurrencyCommandManager extends MultiSubCommand
         super("currency", List.of("cr", "c"));
 
         register(new BalanceCommand(currencyManager));
+        register(new WithdrawCommand(currencyManager));
     }
 
     @Override

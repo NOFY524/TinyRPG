@@ -7,7 +7,7 @@ public class CurrencyFormatter
         return String.format("%,d", value);
     }
 
-    public static String format_compact(long value)
+    public static String formatCompact(long value)
     {
         if (value >= 1_000_000_000) {
             return String.format("%.1fB", value / 1_000_000_000.0);

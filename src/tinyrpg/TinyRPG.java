@@ -8,13 +8,18 @@ import currency.CurrencyDepositListener;
 import currency.CurrencyItemManager;
 import currency.CurrencyManager;
 import currency.CurrencyUIManager;
-import currency.command.WithdrawCommand;
+import shop.ShopCommandHandler;
+import shop.config.ShopConfigManager;
+import shop.ui.ShopUIManager;
 
 public class TinyRPG extends JavaPlugin
 {
     private CurrencyManager currencyManager;
     private CurrencyUIManager currencyUIManager;
     private CurrencyDepositListener currencyDepositListener;
+
+    private ShopUIManager shopUIManager;
+    private ShopConfigManager shopConfigManager;
 
     private TinyRPGCommandExecutor tinyRPGCommandExecutor;
 
@@ -23,23 +28,29 @@ public class TinyRPG extends JavaPlugin
     {
         getLogger().info("Hello, world! from TinyRPG");
 
+        // Initializing currency and scheduling data store
         CurrencyItemManager.init(this);
 
-        // Initializing currency and scheduling data store
         this.currencyManager = new CurrencyManager(this);
         Bukkit.getScheduler().runTaskTimer(this, currencyManager::storeData, 20L * 60L * 5L, 20L * 60L * 5L);
 
         this.currencyUIManager = new CurrencyUIManager(currencyManager);
-        Bukkit.getPluginManager().registerEvents(currencyUIManager, this);
+        getServer().getPluginManager().registerEvents(currencyUIManager, this);
 
         this.currencyDepositListener = new CurrencyDepositListener(currencyManager);
-        Bukkit.getPluginManager().registerEvents(currencyDepositListener, this);
+        getServer().getPluginManager().registerEvents(currencyDepositListener, this);
+
+        // Initializing shop
+        this.shopConfigManager = new ShopConfigManager(this);
+
+        this.shopUIManager = new ShopUIManager(currencyManager, shopConfigManager);
+        getServer().getPluginManager().registerEvents(shopUIManager, this);
 
         // CommandHandler registration
         tinyRPGCommandExecutor = new TinyRPGCommandExecutor();
 
         tinyRPGCommandExecutor.register(new CurrencyCommandManager(currencyManager));
-        tinyRPGCommandExecutor.register(new WithdrawCommand(currencyManager));
+        tinyRPGCommandExecutor.register(new ShopCommandHandler(shopUIManager));
 
         getCommand("tr").setExecutor(tinyRPGCommandExecutor);
         getCommand("tr").setTabCompleter(tinyRPGCommandExecutor);

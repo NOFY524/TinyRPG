@@ -2,7 +2,7 @@ package currency.command;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
+import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -130,7 +130,7 @@ public class WithdrawCommand extends SubCommand
             ItemStack checkItem = CurrencyItemManager.createCheck(amount);
             checkItem.setAmount(currentStackSize);
 
-            java.util.Map<Integer, ItemStack> overflow = mockInventory.addItem(checkItem);
+            Map<Integer, ItemStack> overflow = mockInventory.addItem(checkItem);
 
             if (!overflow.isEmpty())
                 return false;

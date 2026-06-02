@@ -3,7 +3,7 @@ package currency;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -61,7 +61,7 @@ public class CurrencyStorage
         } catch (Exception e) {
             env.panic("currency: error while reading data file. Reason: " + e.getMessage());
 
-            return null;
+            return new HashMap<>();
         }
     }
 
